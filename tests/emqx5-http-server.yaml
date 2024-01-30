@@ -3,12 +3,13 @@ region: eu-west-1
 use_spot_instances: true
 emqx:
   dashboard_default_password: admin
+  emqx_package_version: e5.3.0
   nodes:
     - role: core
-      instance_type: m7i.xlarge
+      instance_type: m6i.xlarge
       instance_count: 2
     - role: replicant
-      instance_type: m7i.xlarge
+      instance_type: m6i.xlarge
       instance_count: 1
   scripts:
     - scripts/create-http-server-integration.sh
@@ -19,4 +20,4 @@ emqttb:
 http:
   instance_type: m7i.xlarge
   nodes:
-    - instance_count: 1  
+    - instance_count: 1
