@@ -69,3 +69,16 @@ session_persistence {
   }
 }
 {% endif -%}
+
+{% if emqx_session_persistence_cache_enabled -%}
+session_persistence {
+  cache_enabled = true
+  cache_prefetch_topic_filters = [
+    {%- for t in emqx_session_persistence_cache_topic_filters -%}
+    "{{ t }}"
+    {%- endfor -%}
+  ]
+}
+{%- else -%}
+session_persistence.cache_enabled = false
+{%- endif -%}

@@ -322,6 +322,8 @@ resource "local_file" "ansible_emqx_group_vars" {
     emqx_version_family              = local.emqx_version_family
     emqx_dashboard_default_password  = local.emqx_dashboard_default_password
     http_server_url                  = length(module.http) > 0 ? "http://${[for x in module.http : x.fqdn][0]}" : ""
+    emqx_session_persistence_cache_enabled       = try(local.spec.emqx.session_persistence_cache_enabled, false)
+    emqx_session_persistence_cache_topic_filters = try(local.spec.emqx.session_persistence_cache_topic_filters, [])
   })
   filename = "${path.module}/ansible/group_vars/emqx${local.emqx_version_family}.yml"
 }
